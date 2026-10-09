@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BM Tahun 4 • Arcade Golongan Kata</title>
+<style>
+:root{--navy:#172554;--pink:#ff4fa3;--yellow:#ffe45e;--cyan:#54f4ff;--green:#50f5a3}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:white;background:linear-gradient(135deg,#24105a,#064e78 55%,#171044);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:32px 32px;animation:stars 16s linear infinite}
+@keyframes stars{to{background-position:160px 160px}}@keyframes bob{50%{transform:translateY(-8px)}}@keyframes glow{50%{box-shadow:0 0 25px #54f4ff}}
+header{text-align:center;padding:20px 12px 8px;position:relative}h1{margin:4px 0;font-size:clamp(1.5rem,5vw,2.7rem);text-shadow:3px 3px #ff4fa3,0 0 18px #54f4ff}.sub{color:#c9faff;font-weight:700}
+.wrap{max-width:1000px;margin:auto;padding:12px;position:relative}.panel{background:#101b49eF;border:2px solid #6ff7ff;border-radius:22px;padding:18px;box-shadow:0 10px 0 #080d2a,0 0 22px #24dfff55;margin:12px 0}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}.pill{border:1px solid #8ef8ff;border-radius:99px;padding:7px 12px;background:#172b66;font-weight:800}.btn{cursor:pointer;border:0;border-radius:14px;padding:12px 17px;font-size:1rem;font-weight:900;color:#15204b;background:linear-gradient(135deg,var(--yellow),#ffad55);box-shadow:0 5px 0 #b35c24;touch-action:manipulation}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #b35c24}.btn.alt{background:linear-gradient(135deg,#66f8ff,#83ffa7);box-shadow:0 5px 0 #168a9d}.btn.pink{background:linear-gradient(135deg,#ff80c2,#ffcfeb);box-shadow:0 5px 0 #a52e76}
+#maze{display:block;width:100%;max-width:520px;height:245px;background:#090d2c;border:3px solid #54f4ff;border-radius:16px;margin:12px auto;touch-action:none}
+.controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.controls .btn{min-width:58px}
+h2{margin:5px 0 12px;color:var(--yellow)}.question{font-size:clamp(1.1rem,3vw,1.45rem);font-weight:850;line-height:1.4}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}.answer{background:#263a7a;color:white;border:2px solid #829cff;border-radius:15px;padding:14px;text-align:left;font-size:1rem;font-weight:750;cursor:pointer}.answer:hover{border-color:var(--yellow);transform:translateY(-2px)}.answer:disabled{cursor:default;opacity:.9}.answer.good{background:#087a5b;border-color:#67ffc1}.answer.bad{background:#922c69;border-color:#ffb1d9}
+.notegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.note{padding:14px;border-radius:16px;background:linear-gradient(145deg,#283b81,#542c86);border:1px solid #8ea8ff}.note b{color:#ffe45e}.hidden{display:none!important}.feedback{min-height:32px;font-weight:900;font-size:1.1rem;color:#ffe45e;text-align:center;margin:12px}.big{font-size:3rem;animation:bob 1.5s infinite}.progress{height:12px;border-radius:99px;background:#26325d;overflow:hidden;flex:1;min-width:100px}.progress div{height:100%;width:0;background:linear-gradient(90deg,#50f5a3,#54f4ff,#ff4fa3);transition:width .3s}.footer{text-align:center;color:#cbd5ff;font-size:.86rem;padding:15px}.win{text-align:center;background:linear-gradient(130deg,#9d2cff,#ed3d9a,#ff9d37);padding:26px;border-radius:24px;box-shadow:0 0 35px #ff4fa3}
+@media(max-width:520px){.answers{grid-template-columns:1fr}.panel{padding:14px}.row{gap:8px}#maze{height:220px}}
+</style></head>
+<body>
+<header><div class="big">👾 ⭐ 🟡</div><h1>BM TAHUN 4: GOLONGAN KATA</h1><div class="sub">ARCADE KATA • Misi Pac-Man Bahasa</div></header>
+<main class="wrap">
+<section class="panel">
+<div class="row"><span class="pill">🎓 Tahun 4</span><span class="pill">👨🏻‍🏫 MUHAMAD SYAWALWAHED</span><span class="pill">🏫 SK (P) JALAN YAHYA AWAL</span></div>
+<p><b>🎯 Objektif:</b> Murid mengenal pasti dan menggunakan golongan kata dengan betul melalui permainan yang menyeronokkan.</p>
+<p><b>📖 Fokus SK &amp; SP:</b> Tatabahasa — mengenal pasti dan menggunakan golongan kata mengikut konteks. Bahan ini disusun sebagai latihan pengukuhan selaras dengan fokus DSKP Bahasa Melayu Tahun 4; semak nombor SK/SP dengan dokumen DSKP sekolah.</p>
+<div class="row"><button class="btn alt" id="soundBtn" onclick="toggleSound()">🔊 Bunyi: ON</button><button class="btn pink" onclick="showNotes()">📚 Nota infografik</button><span class="pill">⭐ Bintang: <span id="stars">0</span></span></div>
+</section>
+<section class="panel" id="notes">
+<h2>📌 NOTA INFOGRAFIK: GOLONGAN KATA</h2><div class="notegrid">
+<div class="note">🧑 <b>Kata Nama</b><p>Menamakan orang, haiwan, tempat atau benda.<br>Contoh: <i>Ali, kucing, sekolah, buku</i>.</p></div>
+<div class="note">🏃 <b>Kata Kerja</b><p>Menunjukkan perbuatan atau keadaan.<br>Contoh: <i>berlari, membaca, tidur</i>.</p></div>
+<div class="note">🌈 <b>Kata Adjektif</b><p>Menerangkan sifat atau keadaan.<br>Contoh: <i>cantik, tinggi, manis, sejuk</i>.</p></div>
+<div class="note">🔗 <b>Kata Tugas</b><p>Menjalankan tugas tatabahasa dalam ayat, seperti kata sendi, hubung dan bantu.<br>Contoh: <i>di, dan, sedang, kerana</i>.</p></div>
+</div><p>💡 Petua: Tanya “siapa/apa?” (kata nama), “buat apa?” (kata kerja), “bagaimana?” (kata adjektif).</p><button class="btn" onclick="startGame()">🚀 Mula Misi!</button></section>
+<section class="panel hidden" id="game">
+<div class="row"><span class="pill">MISI <span id="qnum">1</span>/25</span><span class="pill">⭐ <span id="score">0</span></span><div class="progress"><div id="bar"></div></div></div>
+<h2>🟡 PAC-MAN: KUTIP 3 BINTANG!</h2><p>Gerakkan Pac-Man dengan kekunci anak panah atau butang. Kutip 3 titik bercahaya untuk membuka soalan.</p>
+<canvas id="maze" width="520" height="245" aria-label="Permainan Pac-Man"></canvas><div class="controls"><button class="btn alt" onclick="move(0,-1)">⬆️</button></div><div class="controls"><button class="btn alt" onclick="move(-1,0)">⬅️</button><button class="btn alt" onclick="move(0,1)">⬇️</button><button class="btn alt" onclick="move(1,0)">➡️</button></div>
+<div class="feedback" id="mazeMsg">Kutip semua 3 titik!</div>
+<div id="quiz" class="hidden"><hr><div class="question" id="question"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="row"><button class="btn alt hidden" id="next" onclick="nextQuestion()">➡️ Soalan seterusnya</button></div></div>
+</section>
+<section class="panel hidden" id="finish"><div class="win"><div class="big">🏆🎉🌟</div><h2>TAHNIAH, JUARA BAHASA!</h2><p id="result"></p><p>Teruskan berlatih dan jadilah jaguh golongan kata!</p><button class="btn" onclick="startGame()">🔁 Main semula</button></div></section>
+<div class="footer">Dibina untuk pembelajaran Bahasa Melayu Tahun 4 • Boleh dimainkan pada telefon, tablet dan komputer.</div>
+</main>
+<script>
+const data=[
+["Perkataan manakah kata nama am?","berlari","sekolah","cantik","sedang",1],
+["Pilih kata kerja dalam ayat: Adik membaca buku.","Adik","buku","membaca","itu",2],
+["Perkataan 'tinggi' ialah kata…","nama","kerja","adjektif","hubung",2],
+["Yang manakah kata nama khas?","kucing","Siti","kerusi","pensel",1],
+["Pilih kata kerja: Burung itu terbang tinggi.","burung","tinggi","itu","terbang",3],
+["Perkataan 'manis' menerangkan…","perbuatan","rasa/sifat","tempat","orang",1],
+["Yang manakah kata tugas?","berlari","merah","dan","guru",2],
+["Dalam ayat 'Ibu memasak nasi', kata kerja ialah…","Ibu","memasak","nasi","ayat",1],
+["'Kuala Lumpur' ialah kata nama…","am","khas","kerja","adjektif",1],
+["Pilih kata adjektif.","menyanyi","meja","lembut","mereka",2],
+["Perkataan 'di' dalam 'di sekolah' ialah kata…","nama","kerja","adjektif","tugas",3],
+["Yang manakah kata nama am?","Malaysia","Encik Ali","hospital","Johor Bahru",2],
+["Dalam 'Murid itu rajin', kata adjektif ialah…","murid","itu","rajin","dalam",2],
+["Pilih kata kerja.","berjalan","hijau","cantik","kerana",0],
+["Kata nama merujuk kepada…","perbuatan sahaja","orang, haiwan, tempat atau benda","sifat sahaja","kata penghubung sahaja",1],
+["'Kucing tidur di atas tikar.' Kata kerja ialah…","kucing","di","atas","tidur",3],
+["Yang manakah kata adjektif perasaan?","gembira","berlari","sekolah","dan",0],
+["Pilih kata tugas dalam ayat 'Ali dan Abu bermain.'","Ali","Abu","dan","bermain",2],
+["Perkataan 'cantik' dalam 'bunga cantik' ialah…","kata nama","kata kerja","kata adjektif","kata sendi",2],
+["Yang manakah kata nama khas?","sungai","Cikgu Farah","buku","kebun",1],
+["Pilih kata kerja yang sesuai: Kakak ___ baju.","merah","menyidai","tinggi","tetapi",1],
+["'Sangat' dalam 'sangat besar' berfungsi sebagai…","kata penguat","kata nama","kata kerja","kata ganti nama",0],
+["Pilih kata adjektif ukuran.","berlari","panjang","mereka","dari",1],
+["Dalam 'Mereka pergi ke taman', kata tugas ialah…","mereka","pergi","taman","ke",3],
+["Ayat manakah menggunakan kata kerja?","Baju itu biru.","Amin menulis surat.","Rumah itu besar.","Cuaca nyaman.",1]
+].map((x,i)=>({q:x[0],a:x.slice(1,5),c:x[5],n:i}));
+let idx=0,score=0,stars=0,sound=true,unlocked=false,got=new Set(),px=28,py=28,dots=[],answered=false;
+const $=id=>document.getElementById(id);
+function toggleSound(){sound=!sound;$("soundBtn").textContent="🔊 Bunyi: "+(sound?"ON":"OFF")}
+function speak(t){if(!sound)return;try{let u=new SpeechSynthesisUtterance(t);u.lang="ms-MY";u.rate=.92;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function tone(ok){if(!sound)return;try{let c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?880:220;g.gain.value=.07;o.start();o.stop(c.currentTime+.16)}catch(e){}}
+function showNotes(){ $("notes").classList.toggle("hidden"); }
+function startGame(){idx=0;score=0;stars=0;$("stars").textContent=0;$("score").textContent=0;$("finish").classList.add("hidden");$("notes").classList.add("hidden");$("game").classList.remove("hidden");resetMaze();$("quiz").classList.add("hidden");$("qnum").textContent=1;window.scrollTo({top:$("game").offsetTop,behavior:"smooth"})}
+function resetMaze(){px=28;py=28;got=new Set();unlocked=false;dots=[[260,45],[465,120],[260,205]];$("mazeMsg").textContent="Kutip semua 3 titik!";$("quiz").classList.add("hidden");draw()}
+function draw(){let c=$("maze"),ctx=c.getContext("2d");ctx.fillStyle="#090d2c";ctx.fillRect(0,0,c.width,c.height);ctx.strokeStyle="#3857bc";ctx.lineWidth=4;for(let x=15;x<520;x+=52){ctx.beginPath();ctx.moveTo(x,12);ctx.lineTo(x,233);ctx.stroke()}for(let y=25;y<245;y+=48){ctx.beginPath();ctx.moveTo(10,y);ctx.lineTo(510,y);ctx.stroke()}dots.forEach((d,i)=>{if(!got.has(i)){ctx.fillStyle="#ffe45e";ctx.shadowColor="#ffe45e";ctx.shadowBlur=15;ctx.beginPath();ctx.arc(d[0],d[1],7,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0}});ctx.fillStyle="#ffd92f";ctx.beginPath();ctx.moveTo(px,py);ctx.arc(px,py,13,.25,Math.PI*1.75);ctx.closePath();ctx.fill();ctx.fillStyle="#fff";ctx.font="14px sans-serif";ctx.fillText("PAC",px-13,py+27)}
+function move(dx,dy){if(unlocked||$("game").classList.contains("hidden"))return;px=Math.max(18,Math.min(502,px+dx*24));py=Math.max(18,Math.min(227,py+24*dy));dots.forEach((d,i)=>{if(Math.hypot(px-d[0],py-d[1])<26)got.add(i)});draw();if(got.size===3){unlocked=true;$("mazeMsg").textContent="✨ Hebat! Soalan dibuka!";showQuestion()}}
+document.addEventListener("keydown",e=>{let m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};if(m[e.key]){e.preventDefault();move(...m[e.key])}});
+function showQuestion(){let d=data[idx];$("quiz").classList.remove("hidden");$("question").textContent=(idx+1)+". "+d.q;$("answers").innerHTML="";$("feedback").textContent="";$("next").classList.add("hidden");answered=false;d.a.forEach((a,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+i)+". "+a;b.onclick=()=>choose(i,b);$("answers").appendChild(b)});$("quiz").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function choose(i,b){if(answered)return;let d=data[idx];if(i===d.c){answered=true;score+=10;stars++;$("score").textContent=score;$("stars").textContent=stars;tone(true);speak("Betul! Syabas!");$("feedback").textContent="✅ Betul! Syabas! +10 mata ⭐";b.classList.add("good");[...$("answers").children].forEach(x=>x.disabled=true);$("next").classList.remove("hidden")}else{tone(false);speak("Belum tepat. Cuba lagi!");$("feedback").textContent="❌ Belum tepat. Cuba lagi!";b.classList.add("bad");b.disabled=true}}
+function nextQuestion(){idx++;if(idx>=data.length){$("game").classList.add("hidden");$("finish").classList.remove("hidden");$("result").textContent=`Anda memperoleh ${score}/250 mata dan ${stars} bintang daripada 25 soalan!`;speak("Tahniah! Anda telah menamatkan misi Bahasa Melayu.");$("finish").scrollIntoView({behavior:"smooth"});return}$("qnum").textContent=idx+1;$("bar").style.width=(idx/25*100)+"%";resetMaze()}
+draw();
+</script></body></html>
